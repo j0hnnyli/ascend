@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import categories from '@/lib/content/categories';
+import categoriesInfo from '@/lib/content/categoriesInfo';
 import Image from "next/image";
 import { motion, AnimatePresence } from 'framer-motion';
 import { twMerge } from "tailwind-merge";
@@ -11,7 +11,7 @@ export default function CategoriesSection(){
 
   return (
     <div className='flex flex-col lg:flex-row gap-5 justify-between'>
-      {categories.map((category, index) => (
+      {categoriesInfo.map((category, index) => (
         <CategoryExpandCard
           key={category.id}
           index={index}
@@ -40,7 +40,7 @@ function CategoryExpandCard({index, title, img, description, setOpenIndex, isOpe
     <motion.div
       initial={{x: -100, opacity: 0}}
       whileInView={{x : 0, opacity: 1}}
-      transition={{ duration : 0.1, delay: index * 0.1}}
+      transition={{ duration : 0.1, delay: index * 0.2}}
       viewport={{amount: 0.2}}
       onClick={setOpenIndex}
       className={twMerge(

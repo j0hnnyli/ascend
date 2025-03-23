@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Crimson_Text } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BodyWrapper from "@/components/BodyWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${crimsonText.variable} antialiased bg-[var(--primary-color)]`}
       >
         <Navbar />
-        <main className="mt-32 mx-auto">{children}</main>
+        <BodyWrapper className="mt-28">
+          {children}
+        </BodyWrapper>
         <Footer />
       </body>
     </html>

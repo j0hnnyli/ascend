@@ -2,27 +2,29 @@ import CategoriesSection from "@/components/CategoriesSection";
 import PopularClothes from "@/components/PopularClothes";
 import Showcase from "@/components/showcase/Showcase";
 import supabase from "@/lib/supabaseClient";
+import Product from "@/lib/types/productType";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
-  const { data } = await supabase.from('populars').select().eq('category', 'Clothes');
+  const { data } : {data : Product[] | null} = await supabase.from('populars').select().eq('category', 'Clothes');
 
-  if(!data) return;
+  if(!data) return null;
 
   return (
-    <div className="max-w-[2000px] mx-auto">
+    <div className="max_width">
       <Showcase />
       <div className="bg-[var(--secondary-color)] py-20">
         <div className="w-[80%] md:w-[60%] mx-auto text-center">
-          <h2>
+          <h2 className="mb-5">
             We craft modern styles in clothing, shoes, electronics and
             more with blending timeless design, local production, and responsibly
             sourced materials for a better future
           </h2>
-          <button className="px-6 py-1 border mt-5">Our Story</button>
+          <Link href='/about' className="px-6 py-1 border hover:bg-[var(--primary-color)]">Our Story</Link>
         </div>
 
-        <div className="mt-20 w-[85%] mx-auto font_crimson">
+        <div className="mt-20 px-5 mx-auto font_crimson">
           <h2 className="text-center text-4xl mb-5">
             Ascend&apos;s Collections
           </h2>
@@ -35,6 +37,7 @@ export default async function Home() {
           src="/clothing.jpg"
           alt="/cotheing"
           fill
+          priority
           className="object-cover brightness-[60%]"
         />
 
@@ -47,9 +50,11 @@ export default async function Home() {
               <p className="text-lg">
                 We craft modern styles in clothing with a focus on timeless design, quality craftsmanship, and sustainable materials—ensuring fashion that looks good, feels good, and does good for the future
               </p>
-              <button className="px-6 py-2 border mt-5">
-                Shop Now
-              </button>
+              <div className="mt-5">
+                <Link href="/shop/Clothes" className="px-6 py-2 border hover:bg-[var(--primary-color)] hover:text-black">
+                  Shop Now
+                </Link>
+              </div>
             </div>
           </div>
 
