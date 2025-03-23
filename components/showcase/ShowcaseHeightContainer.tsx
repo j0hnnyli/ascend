@@ -10,7 +10,7 @@ export default function ShowcaseHeightContainer({children} : Props){
 
   useEffect(() => {
     const getHeight = () => {
-      setHeight(Math.min(window.innerHeight - 128, 1000))
+      setHeight(Math.min(window.innerHeight - 112, 1000))
     }
 
     getHeight();
@@ -23,7 +23,7 @@ export default function ShowcaseHeightContainer({children} : Props){
   return (
     <div 
       style={{ height }}
-      className="flex items-center justify-center px-4"
+      className="flex items-center justify-center px-5"
     >
       {children}
     </div>
