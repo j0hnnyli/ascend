@@ -21,7 +21,6 @@ export default async function Home() {
             more with blending timeless design, local production, and responsibly
             sourced materials for a better future
           </h2>
-
           <Link href='/about' className="px-6 py-1 border hover:bg-[var(--primary-color)]">Our Story</Link>
         </div>
 
@@ -51,7 +50,6 @@ export default async function Home() {
               <p className="text-lg">
                 We craft modern styles in clothing with a focus on timeless design, quality craftsmanship, and sustainable materials—ensuring fashion that looks good, feels good, and does good for the future
               </p>
-
               <div className="mt-5">
                 <Link href="/shop/Clothes" className="px-6 py-2 border hover:bg-[var(--primary-color)] hover:text-black">
                   Shop Now
