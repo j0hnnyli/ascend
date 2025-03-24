@@ -33,7 +33,7 @@ export default function Footer(){
               <div className="block underline hover:underline-offset-0 cursor-pointer">Twitter/X</div>
             </div>
             
-            <Link href='/' className="block underline hover:underline-offset-0">Shipping & Returns</Link>
+            <Link href='/shipping' className="block underline hover:underline-offset-0">Shipping & Returns</Link>
           </div>
         </div>
         <p className="font_crimson my-5">
