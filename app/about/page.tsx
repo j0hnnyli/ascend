@@ -1,5 +1,7 @@
 import Image from "next/image";
 import ApproachHoverImg from "./ApproachHoverImg";
+import RevealOpacity from "@/components/animation-components/RevealOpacity";
+import RevealY from "@/components/animation-components/RevealY"
 
 
 export default function About(){
@@ -7,22 +9,32 @@ export default function About(){
     <div className="text-white p-2 md:py-16 md:px-5 max_width"> 
       <div className="flex flex-col md:flex-row justify-between gap-5 ">
         <div className="w-full flex flex-col justify-between mt-10 md:mt-0">
-          <h2 className="font_crimson text-4xl ">
-            Crafted For a Sustainable Future
-          </h2>
+          <RevealOpacity 
+            delayTime={0.04}
+            text="Crafted For a Sustainable Future" 
+            className="font_crimson text-4xl"
+          />
 
           <div className="pr-4 mt-10">
-            <p >
+            <RevealY 
+              delayTime={0.6}
+            >
               Founded by Johnny in 2025, Ascend was built on a vision of blending modern style with timeless craftsmanship. With a deep commitment to sustainability, we create thoughtfully designed products that balances contemporary aesthetics with responsible production.
-            </p>
+            </RevealY>
 
-            <p className="mt-10">
+            <RevealY 
+              delayTime={0.7} 
+              className="mt-10"
+            >
               Each collection features effortlessly refined pieces crafted from high-quality, ethically sourced materials—ensuring durability, comfort, and style that lasts. Every garment is made with care, embracing local production and sustainable practices to shape a better future in fashion.
-            </p>
+            </RevealY>
           </div>
         </div>
 
-        <div className="h-[300px] md:h-[600px] w-full">
+        <RevealY 
+          delayTime={0.5}
+          className="h-[300px] md:h-[600px] w-full"
+        >
           <Image
             src="/timelessfashion.jpg"
             alt="timeless-fashion"
@@ -30,11 +42,15 @@ export default function About(){
             height={500}
             className="w-full h-full object-cover"
           />
-        </div>
+        </RevealY>
       </div>
 
       <div className="mt-20">
-        <h2 className="text-4xl font_crimson text-center font_crimson">Our Appraoch</h2>
+        <RevealOpacity 
+          delayTime={0.04}
+          text="Our Appraoch"
+          className="text-4xl font_crimson text-center font_crimson"
+        />
         <div className="mt-10 flex flex-row flex-wrap gap-5 justify-center text-center">
           <ApproachHoverImg
             img='/sustainable.jpg'
