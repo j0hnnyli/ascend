@@ -10,6 +10,7 @@ type Props = {
   once?: boolean;
 }
 
+
 export default function RevealY({children, delayTime = 0, className, once=true} : Props){
   return (
     <motion.div
