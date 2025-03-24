@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import Image from "next/image"
 import { twMerge } from "tailwind-merge";
+import RevealY from "@/components/animation-components/RevealY";
 
 type Props = {
   img : string;
@@ -15,7 +16,9 @@ export default function ApproachHoverImg({img, title, description} : Props){
   const [showInfo, setShowInfo] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <RevealY
+      className="flex flex-col justify-center items-center"
+    >
       <div 
         onMouseEnter={() => setShowInfo(true)}
         onMouseLeave={() => setShowInfo(false)}
@@ -47,6 +50,6 @@ export default function ApproachHoverImg({img, title, description} : Props){
         )}
       </div>
       <h3 className="text-center text-md md:text-xl font_crimson">{title}</h3>
-    </div>
+    </RevealY>
   )
 }
