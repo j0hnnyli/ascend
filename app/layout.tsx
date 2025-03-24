@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BodyWrapper from "@/components/BodyWrapper";
+import MediaNavbar from "@/components/MediaNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${crimsonText.variable} antialiased bg-[var(--primary-color)]`}
       >
         <Navbar />
-        <BodyWrapper className="mt-28">
+        <MediaNavbar />
+        <BodyWrapper className="mt-16 md:mt-28">
           {children}
         </BodyWrapper>
         <Footer />

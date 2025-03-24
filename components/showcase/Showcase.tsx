@@ -43,7 +43,7 @@ export default function Showcase(){
   return (
     <ShowcaseHeightContainer>
       <div 
-        className="h-[95%] w-full relative"
+        className="h-full w-full relative"
       >
         <Image
           src={showcaseSlides[slide].img}
