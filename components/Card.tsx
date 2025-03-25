@@ -1,30 +1,16 @@
 'use client'
 
 import Image from "next/image";
-import { useState } from "react";
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { twMerge } from "tailwind-merge";
+import Product from "@/lib/types/productType";
+import QuickAddButton from "./QuickAddButton";
+import Link from "next/link";
 
 type Props = {
-  title : string;
-  images : string[];
-  price: number;
+  product : Product;
 }
 
-export default function Card({ title, images, price } : Props ){
-  const [showImgNav, setShowImgNav] = useState<boolean>(false);
-  const [currImg, setCurrImg] = useState<number>(0);
-
-  const handlePrevImg = () => {
-    if(currImg === 0 ) return;
-    setCurrImg(currImg - 1)
-  } 
- 
-  const handleNextImg = () => {
-    if(currImg === images.length - 1) return;
-    setCurrImg(currImg + 1)
-  } 
+export default function Card({ product } : Props ){
 
   return ( 
     <motion.div 
@@ -32,48 +18,25 @@ export default function Card({ title, images, price } : Props ){
       whileInView={{y: 0, opacity: 1}}
       transition={{duration: 0.7, ease: "easeIn"}}
       viewport={{once : true, amount : 0.2}}
-      onMouseEnter={() => setShowImgNav(true)}
-      onMouseLeave={() => setShowImgNav(false)}
       className="relative" 
     >
-      {showImgNav && (
-        <div className="absolute top-1/2 z-20 w-full">
-          <div className="text-black flex justify-between items-center mb-2 px-2">
-            <FaChevronLeft 
-              onClick={handlePrevImg}
-              className={twMerge("text-xl cursor-pointer", currImg === 0 && "text-gray-500")}
-            />
-            <FaChevronRight 
-              onClick={handleNextImg}
-              className={twMerge("text-xl cursor-pointer", currImg === images.length - 1 && "text-gray-500")}
-            />
-          </div>
-        </div>
-      )}
-
+      <Link href={`/product/${product.id}`} className="absolute h-full w-full z-20"></Link>
       <div 
-        className="overflow-hidden relative"
+        className="h-[250px] md:h-[525px] flex transition-all ease-in-out duration-500 relative overflow-hidden"
       >
-        <div 
-          style={{ transform: `translateX(-${currImg * 100}%)` }}
-          className="h-[250px] md:h-[525px] flex transition-all ease-in-out duration-500"
-        >
-          {images.map((img) => (
-            <Image
-              key={img}
-              src={img}
-              alt={title}
-              width={300}
-              height={400}
-              className="w-full h-full object-cover brightness-90"
-            />
-          ))}
-        </div>
+        <Image
+          src={product.images[0]}
+          alt={product.title}
+          width={300}
+          height={400}
+          className="w-full h-full object-cover brightness-90"
+        />
+        <QuickAddButton product={product}/>
       </div>
 
       <div className="text-center">
-        <h2>{title}</h2>
-        <p>${price}</p>
+        <h2>{product.title}</h2>
+        <p>${product.price}</p>
       </div>
     </motion.div>
   )
