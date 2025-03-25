@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 import navLinks from "@/lib/content/navLink";
+import CartLengthComponent from "./CartLengthComponent";
 
 const aboutPath = '/about';
 
@@ -54,7 +55,7 @@ export default function MediaNavbar(){
           <div>
             <Link href="/cart" className="flex items-center gap-1 text-xl hover:scale-105 ml-auto">
               <IoIosCart className="cursor-pointer"/>
-              <p className="text-sm">1</p>
+              <CartLengthComponent />
             </Link>
           </div>
         </nav>
@@ -102,7 +103,11 @@ export default function MediaNavbar(){
                     <Link 
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className={twMerge("p-1", pathname === link.href && "border-b")}
+                      className={twMerge("p-1", 
+                          pathname === link.href && "border-b border-black", 
+                          pathname === aboutPath && "border-white"
+                        )
+                      }
                     >
                       {link.name}
                     </Link>

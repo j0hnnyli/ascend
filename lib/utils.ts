@@ -1,3 +1,10 @@
-export async function wait(time : number){
-  return await new Promise((resolve) => setTimeout(() => resolve("resolved"), time))
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+export function wait(time : number){
+  return new Promise((resolve) => setTimeout(() => {resolve('resolved')}, time))
 }
