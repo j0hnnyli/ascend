@@ -21,7 +21,7 @@ export default async function Home() {
             more with blending timeless design, local production, and responsibly
             sourced materials for a better future
           </h2>
-          <Link href='/about' className="px-6 py-1 border hover:bg-[var(--primary-color)]">Our Story</Link>
+          <Link href='/about' className="px-6 py-1 border hover:bg-[var(--primary-color)] border-black">Our Story</Link>
         </div>
 
         <div className="mt-20 px-5 mx-auto font_crimson">

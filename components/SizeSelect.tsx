@@ -7,27 +7,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CartContext } from "@/lib/CartContext";
 import { clotheSizes, shoeSizes } from "@/lib/content/sizes"
-import { useContext } from "react";
 
 type Props = {
   type : string;
   show : boolean;
   className?: string;
+  onChange : (value: string) => void;
+  selectedSize : string;
 }
 
-export default function SizeSelect({type, className, show=true} : Props){
-  const { setSelectedSize } = useContext(CartContext)
+export default function SizeSelect({type, className, show=true, onChange, selectedSize} : Props){
 
   return (
     <>
       {show && (
         <div>
-          <p>Selected Sizes : </p>
-          <Select onValueChange={(value) => setSelectedSize(value)}>
+          <p className="text-sm">Selected Sizes : </p>
+          <Select onValueChange={onChange}>
             <SelectTrigger className={className}>
-              <SelectValue placeholder="Size" />
+              <SelectValue placeholder={selectedSize === "" ? "Size" : selectedSize} />
             </SelectTrigger>
             <SelectContent>
               {

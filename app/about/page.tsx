@@ -26,7 +26,7 @@ export default function About(){
               delayTime={0.7} 
               className="mt-10"
             >
-              Each collection features effortlessly refined pieces crafted from high-quality, ethically sourced materials—ensuring durability, comfort, and style that lasts. Every garment is made with care, embracing local production and sustainable practices to shape a better future in fashion.
+              Each collection features effortlessly refined pieces crafted from high-quality, ethically sourced materials—ensuring durability, comfort, and style that lasts. Designed for everyone, our garments celebrate inclusivity with versatile fits and timeless designs. Every piece is made with care, embracing local production and sustainable practices to shape a better future in fashion.
             </RevealY>
           </div>
         </div>

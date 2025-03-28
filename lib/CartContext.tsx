@@ -1,8 +1,7 @@
 'use client'
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react"
+import { createContext, ReactNode, useState, useEffect, SetStateAction, Dispatch } from "react"
 import Product from "./types/productType";
-
 
 type CartItem = { 
   size: string;
@@ -12,33 +11,31 @@ type CartItem = {
 
 type ContextProps = {
   cart: CartItem[];
-  selectedSize: string;
-  setSelectedSize: Dispatch<SetStateAction<string>>; 
-  quantity: number;
-  setQuantity: Dispatch<SetStateAction<number>>;  
-  handleAdd: (product: Product) => void;
-  handleRemove: (id: number) => void;
+  setCart : Dispatch<SetStateAction<CartItem[]>>;
+  handleAdd: (product: Product, size: string, quantity: number) => void;
+  handleRemove: (cartItemId: string) => void; 
 };
-
 
 export const CartContext = createContext<ContextProps>({
   cart: [],
-  selectedSize: "",
-  quantity: 1,
-  setSelectedSize: () => {},
-  setQuantity: () => {},
+  setCart : () => {},
   handleAdd: () => {},
   handleRemove: () => {},
 });
 
 
 export function CartContextProvider({ children } : {children : ReactNode}){
-  const [selectedSize, setSelectedSize] = useState<string>('');
-  const [quantity, setQuantity] = useState<number>(1);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    if (typeof window !== "undefined"){
+      const storageCart = localStorage.getItem("ascendcart");
+      return storageCart ? JSON.parse(storageCart) : [];
+    }; 
+    
+    return [];
+  });
   
-  const handleAdd = (product : Product) => {
-    const cartItemId = `${product.id}-${selectedSize}`
+  const handleAdd = (product : Product, size : string, quantity: number) => {
+    const cartItemId = `${product.id}-${size}`
 
     setCart((prevCart) => {
       const findItem = prevCart.find((item) => item.cartItemId === cartItemId);
@@ -46,7 +43,7 @@ export function CartContextProvider({ children } : {children : ReactNode}){
       if (findItem) {
         return prevCart.map((item) =>
           item.cartItemId === cartItemId
-            ? { ...item, quantity: item.quantity < 9 ? item.quantity + 1 : 9 }
+            ? { ...item, quantity: item.quantity < 9 ? item.quantity + quantity : 9 }
             : item
         );
       }
@@ -55,7 +52,7 @@ export function CartContextProvider({ children } : {children : ReactNode}){
         ...prevCart,
         {
           ...product,
-          size: selectedSize,
+          size: size,
           quantity: quantity,
           cartItemId: cartItemId,
         },
@@ -63,15 +60,16 @@ export function CartContextProvider({ children } : {children : ReactNode}){
     });
   }
 
-  const handleRemove = (id : number) => {
-    const filtered = cart.filter((item) => item.id !== id)
-    setCart(filtered)
-  }
+  const handleRemove = (cartItemId: string) => {
+    setCart((prevCart) => prevCart.filter((item) => item.cartItemId !== cartItemId));
+  };
+
+  useEffect(() => {
+    localStorage.setItem('ascendcart', JSON.stringify(cart))
+  } , [cart])
 
   const value = {
-    cart, selectedSize, quantity, 
-    handleAdd, handleRemove,
-    setSelectedSize, setQuantity
+    cart, handleAdd, handleRemove, setCart
   }
 
   return (

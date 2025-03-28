@@ -1,12 +1,21 @@
 'use client'
 
 import { CartContext } from "@/lib/CartContext"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
 export default function CartLengthComponent(){
-  const {cart} = useContext(CartContext);
+  const [isMounted, setIsMounted] = useState(false);
+  const { cart } = useContext(CartContext);
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
-    <p className="text-sm">{cart.length}</p>    
+    <>
+      {isMounted && (
+        <p className="text-sm">{cart.length}</p>    
+      )}
+    </>
   )
 }
