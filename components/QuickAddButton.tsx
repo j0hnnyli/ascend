@@ -23,36 +23,46 @@ type Props = {
 }
 
 export default function QuickAddButton({ product } : Props){
+  const { handleAdd } = useContext(CartContext);
+
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { handleAdd, selectedSize } = useContext(CartContext);
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [quantity, setQuantity] = useState<number>(1);
+
 
   const handleQuickAdd = async () => {
     setIsLoading(true)
 
-    if
-      (product.category === 'Shoes' || 
-      (product.category === 'Clothes' && !product.title.includes('Cap')) && selectedSize === ''
-    ){
-      setIsLoading(false)
-      setError('Sizes is Required')
-      setTimeout(() => {setError('')}, 1500)
+    const isSizeRequired = 
+    (product.category === "Shoes" && selectedSize === "") || 
+    (product.category === "Clothes" && !product.title.includes("Cap") && selectedSize === "");
+
+    if (isSizeRequired) {
+      setIsLoading(false);
+      setError("Size is required");
+      setTimeout(() => setError(""), 1500);
       return;
     }
     
-    await wait(1500)
-    setIsLoading(false)
-
+    await wait(1500);
+    setIsLoading(false);
     setSuccess(true);
-    setTimeout(() => {setSuccess(false)}, 1500)
-    handleAdd(product)
+
+    handleAdd(product, selectedSize, quantity);
+
+    setTimeout(() => {
+      setSuccess(false);
+      setSelectedSize("");
+      setQuantity(1); 
+    }, 1500);
   }
 
   return (
     <Sheet>
-      <SheetTrigger className="absolute bottom-3 right-3 bg-[var(--secondary-color)] p-1 rounded-xl cursor-pointer z-30">
-        Quick Shop
+      <SheetTrigger className="absolute bottom-3 right-3 bg-[var(--secondary-color)] p-1 rounded-xl cursor-pointer z-30 hover:bg-[var(--primary-color)]">
+        <IoIosCart className="text-xl"/>
       </SheetTrigger>
 
       <SheetContent className="bg-[var(--primary-color)] border-none p-5 overflow-auto">
@@ -82,26 +92,32 @@ export default function QuickAddButton({ product } : Props){
         <div className="flex gap-5 items-center">
           <div className="w-full">
             <SizeSelect
+              selectedSize={selectedSize}
               type={product.category}
               show={
                 product.category === 'Shoes' || 
                 (product.category === 'Clothes' && !product.title.includes('Cap'))
               }
+              onChange={(value : string) => setSelectedSize(value)}
               className="w-full"
             />
           </div>
+
           <div className="w-full">
-          <p>Quantities : </p>
             <Quantities 
+              quantity={quantity}
+              onChange={(value: string) => setQuantity(Number(value))}
               className="w-full"
             />
           </div>
         </div>
+        
+        <QuantityInCart id={product.id}/>
 
         <button 
           onClick={handleQuickAdd}
           className={twMerge(
-              "rounded-2xl border mt-5 bg-black text-[var(--primary-color)] cursor-pointer py-2 flex items-center justify-center",
+              "border mt-5 bg-black text-[var(--primary-color)] cursor-pointer py-2 flex items-center justify-center",
               error.length > 0 && 'bg-red-500',
               success && 'bg-green-500'
             )
@@ -113,9 +129,7 @@ export default function QuickAddButton({ product } : Props){
                 <IoIosCart className="text-xl"/>
               </span>
               <span>
-                {error.length > 0 && 'Size is Required'}
-                {success && 'Added To Cart' }
-                {(error.length < 1 && success === false) && 'Add To Cart'}
+                {error ? 'Size is Required' : success ? 'Added To Cart' : 'Add To Cart'}
               </span>
             </h3>
           )}
@@ -123,5 +137,27 @@ export default function QuickAddButton({ product } : Props){
 
       </SheetContent>
     </Sheet>
+  )
+}
+
+
+function QuantityInCart({id} : {id : number}){
+  const { cart } = useContext(CartContext);
+
+  const productItems = cart.filter((item) => item.id === id);
+
+  if (productItems.length === 0) return null
+
+  return (
+    <div>
+      <p className="font-semibold">In Cart:</p>
+      <ul className="flex gap-5 overflow-auto">
+        {productItems.map((item) => (
+          <li key={item.cartItemId} className="text-sm">
+            <span className="font-bold">{item.size}</span> : {item.quantity}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

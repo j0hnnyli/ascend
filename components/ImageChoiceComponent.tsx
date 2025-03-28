@@ -1,3 +1,5 @@
+'use client'
+
 import Product from "@/lib/types/productType"
 import Image from "next/image"
 import { useState } from "react"
@@ -6,9 +8,10 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   product : Product;
   className?: string;
+  imageChoiceSide? : "center" | "left" | "right",
 }
 
-export default function ImageChoiceComponent({ product, className } : Props){
+export default function ImageChoiceComponent({ product, className, imageChoiceSide='center' } : Props){
   const [currImgIndex, setCurrImgIndex] = useState<number>(0)
 
   return (
@@ -21,7 +24,14 @@ export default function ImageChoiceComponent({ product, className } : Props){
         className="w-full h-full object-cover"
       />
 
-      <div className="absolute bottom-5 w-full flex items-center justify-center">
+      <div className={twMerge(
+            "absolute bottom-5 w-full flex items-center px-1",
+            imageChoiceSide === 'center' && "justify-center",
+            imageChoiceSide === 'left' && "justify-start",
+            imageChoiceSide === 'right' && "justify-end",
+          )
+        }
+      >
         <div className="flex gap-3">
           {product.images.map((img, i) => (
             <div key={img} 
