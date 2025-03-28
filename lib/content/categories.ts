@@ -5,11 +5,7 @@ const categories = [
   },
   {
     id: 2,
-    title: 'Clothes',
-  },
-  {
-    id: 3,
-    title: 'Shoes',
+    title: 'Fashion',
   },
   {
     id: 4,

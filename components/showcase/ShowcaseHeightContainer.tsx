@@ -12,7 +12,7 @@ export default function ShowcaseHeightContainer({children} : Props){
     const getHeight = () => {
       const isMobile = window.innerWidth < 768; 
       const offset = isMobile ? 64 : 112;
-      setHeight(Math.min(window.innerHeight - offset, 850))
+      setHeight(Math.min(window.innerHeight - offset, 900))
     }
 
     getHeight();
