@@ -54,8 +54,6 @@ export default function QuickAddButton({ product } : Props){
 
     setTimeout(() => {
       setSuccess(false);
-      setSelectedSize("");
-      setQuantity(1); 
     }, 1500);
   }
 
@@ -151,10 +149,11 @@ function QuantityInCart({id} : {id : number}){
   return (
     <div>
       <p className="font-semibold">In Cart:</p>
-      <ul className="flex gap-5 overflow-auto">
+      <ul className="flex gap-3 overflow-auto">
         {productItems.map((item) => (
-          <li key={item.cartItemId} className="text-sm">
-            <span className="font-bold">{item.size}</span> : {item.quantity}
+          <li key={item.cartItemId} className="text-sm font-medium">
+            <span className="font-bold">{item.size}</span>: {item.quantity} 
+            {item.quantity === 9 && <span className="text-red-500"> (max)</span>}
           </li>
         ))}
       </ul>

@@ -4,9 +4,7 @@ import ProductControls from "../ProductControls";
 
 
 type Props = {
-  params : {
-    [id : string] : string;
-  }
+  params : Promise<{id : string}>
 }
 
 export default async function ProductPage({params } : Props){

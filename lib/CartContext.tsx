@@ -43,7 +43,7 @@ export function CartContextProvider({ children } : {children : ReactNode}){
       if (findItem) {
         return prevCart.map((item) =>
           item.cartItemId === cartItemId
-            ? { ...item, quantity: item.quantity < 9 ? item.quantity + quantity : 9 }
+            ? { ...item, quantity: item.quantity < 9 ? (item.quantity + quantity > 9 ? 9 : item.quantity + quantity) : 9 }
             : item
         );
       }

@@ -6,9 +6,7 @@ import categories from "@/lib/content/categories";
 import Card from "@/components/Card";
 
 type Props = {
-  params : {
-    [cateogory : string] : string;
-  }
+  params : Promise<{category : string}>
 }
 
 
@@ -16,9 +14,11 @@ export default async function ShopPage({ params } : Props){
   const param = await params;
   const currCategory = param.category;
 
-  const { data } : {data : Product[] | null} = currCategory.toLowerCase() === 'all' ? 
-    await supabase.from('products').select() : 
-    await supabase.from('products').select().eq('category', currCategory)
+  const { data }: { data: Product[] | null } = 
+  currCategory.toLowerCase() === 'all' ? await supabase.from('products').select()
+    : currCategory.toLowerCase() === 'fashion'
+      ? await supabase.from('products').select().in('category', ['Clothes', 'Shoes'])
+      : await supabase.from('products').select().eq('category', currCategory);
 
   if(!data) return null;
   
