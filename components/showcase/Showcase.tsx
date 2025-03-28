@@ -46,7 +46,7 @@ export default function Showcase(){
           alt={showcaseSlides[slide].title}
           fill  
           priority={slide === 0}
-          className="h-full w-full object-cover brightness-[85%] transition-all ease-in-out"
+          className="h-full w-full object-cover brightness-[80%] transition-all ease-in-out"
         />
 
         <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 font_crimson text-white">
