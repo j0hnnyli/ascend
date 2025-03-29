@@ -5,6 +5,7 @@ import ImageChoiceComponent from "./ImageChoiceComponent"
 import { useState } from "react"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 
 type Props = {
@@ -50,7 +51,13 @@ export default function PopularClothes({clothes} : Props){
           </div>
 
           <div className="text-lg text-center">
-            <h4>{clothes[currClothe].title}</h4>
+            <Link 
+              href={`/product/${clothes[currClothe].id}`}
+            >
+              <p className="hover:underline">
+                {clothes[currClothe].title}
+              </p>
+            </Link>
             <p>${clothes[currClothe].price}</p>
           </div>
         </div>

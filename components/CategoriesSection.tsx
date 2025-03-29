@@ -27,6 +27,7 @@ export default function CategoriesSection(){
         <CategoryExpandCard
           key={category.id}
           index={index}
+          href={category.href}
           title={category.title}
           img={category.img}
           description={category.description}

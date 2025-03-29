@@ -29,31 +29,41 @@ export default function Showcase(){
   const [slide, setSlides] = useState<number>(0);
 
   const handlePrevSlide = () => {
-    setSlides(slide - (slide === 0 ? 0 : 1))
+    setSlides((prevIndex) => prevIndex - 1);
   }
  
   const handleNextSlide = () => {
-    setSlides(slide + (slide === showcaseSlides.length - 1 ? 0 : 1))
+    setSlides((prevIndex) => prevIndex + 1);
   }
 
   return (
     <ShowcaseHeightContainer>
       <div 
-        className="h-full w-full relative"
+        className="h-full w-full relative overflow-hidden "
       >
-        <Image
-          src={showcaseSlides[slide].img}
-          alt={showcaseSlides[slide].title}
-          fill  
-          priority={slide === 0}
-          className="h-full w-full object-cover brightness-[80%] transition-all ease-in-out"
-        />
-
-        <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 font_crimson text-white">
-          <h3 className="text-4xl mb-2">  {showcaseSlides[slide].title} </h3>
-          <Link href={`shop/${showcaseSlides[slide].href}`} className="border py-2 px-4 2xl:text-2xl font-bold hover:bg-[var(--secondary-color)] hover:text-black">
-            Shop Now
-          </Link>
+        <div 
+          className="w-full h-full flex transition-all ease-in-out duration-500" 
+          style={{ transform: `translateX(-${slide * 100}%)` }}
+        >
+          {showcaseSlides.map((currSlide) => (
+            <div 
+              key={currSlide.title} 
+              className="w-full h-full flex-shrink-0 relative"
+            >
+              <Image
+                src={currSlide.img}
+                alt={currSlide.title}
+                fill
+                className="h-full w-full object-cover brightness-[80%]"
+              />
+              <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 font_crimson text-white">
+                <h3 className="text-4xl mb-2">{currSlide.title}</h3>
+                <Link href={`shop/${currSlide.href}`} className="border py-2 px-4 2xl:text-2xl font-bold hover:bg-[var(--secondary-color)] hover:text-black">
+                  Shop Now
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="flex items-center justify-between w-full text-white absolute top-1/2 bottom-1/2">

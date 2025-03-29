@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, AnimatePresence } from 'framer-motion';
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 type Props = {
   index: number;
@@ -10,10 +11,11 @@ type Props = {
   img: string;
   description: string;
   isOpen: boolean;
+  href: string;
   setOpenIndex : () => void;
 };
 
-export default function CategoryExpandCard({index, title, img, description, setOpenIndex, isOpen }: Props) {
+export default function CategoryExpandCard({index, title, img, description, setOpenIndex, isOpen, href }: Props) {
   return (
     <motion.div
       variants={{
@@ -50,14 +52,20 @@ export default function CategoryExpandCard({index, title, img, description, setO
         />
       </div>
 
-      <h2 
-        className={twMerge(
-          "absolute left-4 bottom-0 text-2xl lg:text-4xl lg:-rotate-90 origin-left z-20 transition-opacity duration-300",
-          isOpen && "opacity-0"
+      <AnimatePresence mode="wait">
+        {!isOpen && (
+          <motion.h2
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.1, ease: "easeOut" }}
+            className="absolute left-4 bottom-0 text-2xl lg:text-4xl lg:-rotate-90 origin-left z-20"
+          >
+            {title}
+          </motion.h2>
         )}
-      >
-        {title}
-      </h2>
+      </AnimatePresence>
+
 
       <AnimatePresence>
         {isOpen && (
@@ -91,9 +99,11 @@ export default function CategoryExpandCard({index, title, img, description, setO
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeInOut", delay: 0.3 }}
-              className="py-2 px-4 border"
+              className="border"
             >
-              Shop Now
+              <Link href={href} className="py-2 px-4 hover:bg-[var(--secondary-color)]">
+                Shop Now
+              </Link>
             </motion.button>
           </motion.div>
         )}
