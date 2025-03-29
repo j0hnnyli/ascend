@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const { data } : {data : Product[] | null} = await supabase.from('populars').select().eq('category', 'Clothes');
+  const { data } : {data : Product[] | null} = await supabase.from('populars').select().in('category', ['Clothes', 'Shoes']);
 
   if(!data) return null;
 
@@ -51,7 +51,7 @@ export default async function Home() {
                 We craft modern styles in clothing with a focus on timeless design, quality craftsmanship, and sustainable materials—ensuring fashion that looks good, feels good, and does good for the future
               </p>
               <div className="mt-5">
-                <Link href="/shop/Clothes" className="px-6 py-2 border hover:bg-[var(--primary-color)] hover:text-black">
+                <Link href="/shop/Fashion" className="px-6 py-2 border hover:bg-[var(--primary-color)] hover:text-black">
                   Shop Now
                 </Link>
               </div>
