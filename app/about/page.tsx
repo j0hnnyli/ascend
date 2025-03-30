@@ -2,11 +2,11 @@ import Image from "next/image";
 import ApproachHoverImg from "./ApproachHoverImg";
 import RevealOpacity from "@/components/animation-components/RevealOpacity";
 import RevealY from "@/components/animation-components/RevealY"
-
+import PaddingContainer from "@/components/PaddingContainer";
 
 export default function About(){
   return (
-    <div className="text-white p-2 md:py-16 md:px-5 max_width"> 
+    <PaddingContainer className="text-white max_width"> 
       <div className="flex flex-col md:flex-row justify-between gap-5 ">
         <div className="w-full flex flex-col justify-between mt-10 md:mt-0">
           <RevealOpacity 
@@ -65,6 +65,6 @@ export default function About(){
           />
         </div>
       </div>
-    </div>
+    </PaddingContainer>
   )
 }
