@@ -1,9 +1,10 @@
 import RevealY from "@/components/animation-components/RevealY"
+import PaddingContainer from "@/components/PaddingContainer"
 
 
 export default function ShippingAndReturnPage(){
   return (
-    <div className="max_width p-2 md:py-16 md:px-5 flex flex-col justify-center items-center">
+    <PaddingContainer className="max_width flex flex-col justify-center items-center">
       <RevealY once={false} className="font_crimson text-4xl tracking-widest">Shipping</RevealY>
 
       <RevealY once={false} className="mt-10 flex flex-col justify-center items-center w-[90%] md:w-[50%]">
@@ -46,6 +47,6 @@ export default function ShippingAndReturnPage(){
           Need a different size or changed your mind? No problem! We offer exchanges or store credit for eligible returns. Contact us to start the process, and we&apos;ll help you every step of the way.
         </p>
       </RevealY>
-    </div>
+    </PaddingContainer>
   )
 }

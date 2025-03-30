@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
       {
         protocol : 'https',
         hostname : 'i.imgur.com',
-        
       },
-    ]
+    ],
+    unoptimized: true,
   }
 };
 
