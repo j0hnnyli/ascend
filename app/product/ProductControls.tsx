@@ -53,8 +53,8 @@ export default function ProductControls({product} : Props){
   
 
   return (
-    <div className="w-[80%] my-5">
-      <div className="flex gap-5 items-center">
+    <div className="flex flex-col my-5 gap-5 w-full lg:w-[80%]">
+      <div className="flex gap-5 items-center w-full ">
         <div className="w-full">
           <SizeSelect
             selectedSize={selectedSize}

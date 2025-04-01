@@ -46,7 +46,7 @@ export default async function ShopPage({ params } : Props){
         ))}
       </div>
 
-      <div className="my-9 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-5">
+      <div className="my-9 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {data.map((product) => (
           <Card
             key={product.id}
