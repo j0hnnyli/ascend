@@ -1,5 +1,5 @@
 const navLinks = [
-  { name : 'Shop', href : '/shop/all'}, 
+  { name : 'Shop', href : '/shop/All'}, 
   { name :'About', href: '/about'}, 
   {name : 'Contact', href: '/contact'}
 ]
