@@ -66,48 +66,46 @@ useEffect(() => {
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-5  w-full md:w-[85%]">
-                    <Link href={`/product/${cartItem.id}`} className="md:w-[50%]">
-                      <p className="">{cartItem.title} </p>
-                    </Link>
+                    <div className="md:w-[50%]">
+                      <Link href={`/product/${cartItem.id}`}>
+                        <p className="">{cartItem.title} </p>
+                      </Link>
+                      {cartItem.size && (
+                        <div className="text-gray-500">
+                          <p>Size : {cartItem.size}</p>
+                        </div>
+                      )}
+                    </div>
 
                     <div className="flex flex-col md:flex-row justify-between md:w-[50%] h-full">
-                      <div className="flex justify-between">
-                        <div>
-                          <div className="flex justify-between items-center gap-3 ">
-                            <button 
-                              disabled={cartItem.quantity === 1}
-                              onClick={() => handleSubQuantity(cartItem.cartItemId)}
-                              className={
-                                twMerge("cursor-pointer", 
-                                  cartItem.quantity === 1 && "text-gray-300",
-                                  cartItem.quantity !== 1 && "hover:text-red-500"
-                                )
-                              }
-                            >
-                              -
-                            </button>
+                      <div className="flex justify-between items-center gap-3 self-start">
+                        <button 
+                          disabled={cartItem.quantity === 1}
+                          onClick={() => handleSubQuantity(cartItem.cartItemId)}
+                          className={
+                            twMerge("cursor-pointer", 
+                              cartItem.quantity === 1 && "text-gray-300",
+                              cartItem.quantity !== 1 && "hover:text-red-500"
+                            )
+                          }
+                        >
+                          -
+                        </button>
 
-                            <span>{cartItem.quantity}</span>
+                        <span>{cartItem.quantity}</span>
 
-                            <button
-                              disabled={cartItem.quantity === 9}
-                              onClick={() => handleAddQuantity(cartItem.cartItemId)}
-                              className={
-                                twMerge("cursor-pointer", 
-                                  cartItem.quantity === 9 && "text-gray-300",
-                                  cartItem.quantity !== 9 && "hover:text-green-500"
-                                )
-                              }
-                            >
-                              +
-                            </button>
-                          </div>
-                          {cartItem.size && (
-                            <div>
-                              <p>Size : {cartItem.size}</p>
-                            </div>
-                          )}
-                        </div>
+                        <button
+                          disabled={cartItem.quantity === 9}
+                          onClick={() => handleAddQuantity(cartItem.cartItemId)}
+                          className={
+                            twMerge("cursor-pointer", 
+                              cartItem.quantity === 9 && "text-gray-300",
+                              cartItem.quantity !== 9 && "hover:text-green-500"
+                            )
+                          }
+                        >
+                          +
+                        </button>
                       </div>
 
                       <div className="flex gap-3">

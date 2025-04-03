@@ -1,7 +1,6 @@
 import QuickAddButton from "@/components/QuickAddButton";
 import supabase from "@/lib/supabaseClient"
 import Product from "@/lib/types/productType";
-import { wait } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +11,6 @@ type Props = {
 }
 
 export default async function Recommendations({ category, id } : Props){
-  await wait(3000)
   const {data} : {data: Product[] | null} = await supabase.from('products').select().eq('category', category)
 
   if(!data) return null;

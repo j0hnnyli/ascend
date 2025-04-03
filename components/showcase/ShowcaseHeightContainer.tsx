@@ -1,4 +1,5 @@
 'use client'
+
 import { ReactNode, useEffect, useState } from "react";
 
 type Props = {
@@ -24,7 +25,7 @@ export default function ShowcaseHeightContainer({children} : Props){
 
   return (
     <div 
-      style={{ height }}
+      style={{ height: `${height}px` }} 
       className="flex items-center justify-center p-2 md:p-5"
     >
       {children}
