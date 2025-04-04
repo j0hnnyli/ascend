@@ -13,9 +13,9 @@ export default async function ShopPage({ params } : Props){
 
   const { data }: { data: Product[] | null } = 
   currCategory.toLowerCase() === 'all' ? await supabase.from('products').select()
-    : currCategory.toLowerCase() === 'fashion'
+    : currCategory === 'Fashion'
       ? await supabase.from('products').select().in('category', ['Clothes', 'Shoes'])
-      : await supabase.from('products').select().eq('category', currCategory);
+      : await supabase.from('products').select().eq('category', currCategory[0].toUpperCase() + currCategory.slice(1));
 
   if(!data?.length) return <CategoryNotFound />;
   
