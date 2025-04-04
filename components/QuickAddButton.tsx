@@ -110,7 +110,13 @@ export default function QuickAddButton({ product } : Props){
           </div>
         </div>
         
-        <QuantityInCart id={product.id}/>
+        <QuantityInCart 
+          id={product.id} 
+          isClothes={
+            product.category.toLowerCase() === 'clothes' || 
+            product.category.toLowerCase() === 'shoes'
+          }
+        />
 
         <button 
           onClick={handleQuickAdd}
@@ -139,24 +145,27 @@ export default function QuickAddButton({ product } : Props){
 }
 
 
-function QuantityInCart({id} : {id : number}){
+function QuantityInCart({id, isClothes} : {id : number, isClothes: boolean}){
   const { cart } = useContext(CartContext);
 
   const productItems = cart.filter((item) => item.id === id);
+  const totalQuantity = productItems.reduce((acc, item) => acc + item.quantity, 0);
 
   if (productItems.length === 0) return null
 
   return (
     <div>
-      <p className="font-semibold">In Cart:</p>
-      <ul className="flex gap-3 overflow-auto">
-        {productItems.map((item) => (
-          <li key={item.cartItemId} className="text-sm font-medium">
-            <span className="font-bold">{item.size}</span>: {item.quantity} 
-            {item.quantity === 9 && <span className="text-red-500"> (max)</span>}
-          </li>
-        ))}
-      </ul>
+      <p className="font-semibold">In Cart: {!isClothes ? `${totalQuantity}` : ''} </p>
+      {isClothes && (
+        <ul className="flex gap-3 overflow-auto">
+          {productItems.map((item) => (
+            <li key={item.cartItemId} className="text-sm font-medium">
+              <span className="font-bold">{item.size}</span>: {item.quantity} 
+              {item.quantity === 9 && <span className="text-red-500"> (max)</span>}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

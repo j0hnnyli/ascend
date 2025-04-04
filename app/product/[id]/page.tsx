@@ -4,6 +4,7 @@ import ProductControls from "../ProductControls";
 import PaddingContainer from "@/components/PaddingContainer";
 import Recommendations from "../Reccomendations";
 import Product from "@/lib/types/productType";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { Suspense } from "react";
 
 
@@ -41,7 +42,7 @@ export default async function ProductPage({params } : Props){
         </div>
       </div>
 
-      <Suspense fallback={<div className="bg-gray-300 animate-pulse rounded-xl h-[500px] mt-20"></div>}>
+      <Suspense fallback={<LoadingSkeleton className="bg-gray-300 animate-pulse rounded-xl h-[500px] mt-20" />}>
         <Recommendations id={data[0].id} category={data[0].category} />
       </Suspense>
 
