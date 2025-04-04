@@ -43,7 +43,7 @@ useEffect(() => {
           <p className="text-lg">You have nothing in your shopping cart.</p>
 
           <div className="mt-5">
-            <Link href="/shop/all" className="py-2 px-4 border border-black hover:bg-[var(--secondary-color)]">
+            <Link href="/shop/All" className="py-2 px-4 border border-black hover:bg-[var(--secondary-color)]">
               Continue Shopping
             </Link>
           </div>

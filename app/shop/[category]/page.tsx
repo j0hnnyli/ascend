@@ -3,7 +3,6 @@ import Product from "@/lib/types/productType";
 import Card from "@/components/Card";
 import { FaExclamationTriangle } from 'react-icons/fa';
 
-
 type Props = {
   params: Promise<{ category: string }>;
 }
@@ -13,10 +12,10 @@ export default async function ShopPage({ params } : Props){
   const currCategory = param.category
 
   const { data }: { data: Product[] | null } = 
-  currCategory === 'All' ? await supabase.from('products').select()
+  currCategory.toLowerCase() === 'all' ? await supabase.from('products').select()
     : currCategory === 'Fashion'
       ? await supabase.from('products').select().in('category', ['Clothes', 'Shoes'])
-      : await supabase.from('products').select().eq('category', currCategory);
+      : await supabase.from('products').select().eq('category', currCategory[0].toUpperCase() + currCategory.slice(1));
 
   if(!data?.length) return <CategoryNotFound />;
   
