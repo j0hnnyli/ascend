@@ -9,7 +9,7 @@ import Link from "next/link";
 export default async function Home() {
   const { data } : {data : Product[] | null} = await supabase.from('populars').select().in('category', ['Clothes', 'Shoes']);
 
-  if(!data) return null;
+  if(!data?.length) return null;
 
   return (
     <div className="max_width">

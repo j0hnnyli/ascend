@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import navLinks from "@/lib/content/navLink";
 
 
 export default function Footer(){
@@ -21,10 +22,16 @@ export default function Footer(){
           </div>
 
           <div className="flex justify-evenly gap-10 text-sm mt-5 md:mt-0">
-            <div >
-              <Link href='/shop/all' className="block underline hover:underline-offset-0">Shop</Link>
-              <Link href='/about' className="block underline hover:underline-offset-0">About</Link>
-              <Link href='/contact' className="block underline hover:underline-offset-0">Contact</Link>
+            <div>
+              {navLinks.map(({name, href}) => (
+                <Link 
+                  key={name} 
+                  href={href} 
+                  className="block underline hover:underline-offset-0"
+                >
+                  {name}
+                </Link>
+              ))}
             </div>
 
             <div>
@@ -33,7 +40,9 @@ export default function Footer(){
               <div className="block underline hover:underline-offset-0 cursor-pointer">Twitter/X</div>
             </div>
             
-            <Link href='/shipping' className="block underline hover:underline-offset-0">Shipping & Returns</Link>
+            <div>
+              <Link href='/shipping' className="block underline hover:underline-offset-0">Shipping & Returns</Link>
+            </div>
           </div>
         </div>
         <p className="font_crimson my-5">
