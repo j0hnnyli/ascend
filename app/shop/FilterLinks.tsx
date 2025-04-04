@@ -17,7 +17,7 @@ export default function FilterLinks({ title } : Props){
       href={`/shop/${title}`}
       className={
         twMerge("hover:underline cursor-pointer",
-          category  ===  title && "underline"
+          category.toLowerCase()  ===  title.toLowerCase() && "underline"
         )
       }
     >
