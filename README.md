@@ -1,9 +1,11 @@
+<a href="https://ascend-mu.vercel.app/">
+  <img src="/public/ascend.png" src="ascend"/>
+</a>
+
 ## Ascend
 A fully functional eCommerce project with complete functionality. Users can browse products, add/remove items, and adjust quantities, with the cart persisting for a smooth shopping experience.
 
-<a href="https://swiftshop-alpha.vercel.app/">
-  <img src="/public/ascend.png" src="ascend"/>
-</a>
+Click on the image above to visit the project.
 
 ## Under The Hood
 - Next.js
