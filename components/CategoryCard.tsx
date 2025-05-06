@@ -7,30 +7,25 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
-  index: number;
   title: string;
   img: string;
   description: string;
-  // isOpen: boolean;
   href: string;
-  // setOpenIndex: () => void;
 };
 
-export default function CategoryCard({ index, title, img, href }: Props) {
+export default function CategoryCard({ title, img, href }: Props) {
   const [isHover, setIsHover] = useState<boolean>(false);
 
   return (
     <motion.div
       variants={{
-        hidden: { scale: 0.9, rotate: 5, opacity: 0 }, 
+        hidden: { x:-50, opacity: 0 }, 
         show: {
-          scale: 1,
+          x : 0,
           opacity: 1,
-          rotate: 0,
           transition: {
             duration: 0.6, 
             ease: "easeOut",
-            delay: index * 0.15, 
             type: 'spring'
           }
         },
@@ -56,10 +51,10 @@ export default function CategoryCard({ index, title, img, href }: Props) {
 
       {isHover && (
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scaleX: 0, originX: 'left' }}
+          animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.3 }}
-          className="absolute bottom-4 left-4 right-4 bg-gray-800 bg-opacity-80 rounded-lg flex items-center justify-center overflow-hidden"
+          className="absolute bottom-4 left-4 right-4 bg-gray-800 bg-opacity-80 rounded-lg flex items-center justify-center overflow-hidden "
         >
           <Link href={href} className="text-lg p-4 hover:text-gray-800 hover:bg-[var(--secondary-color)] w-full text-center">
             Shop Now

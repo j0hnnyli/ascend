@@ -13,6 +13,7 @@ export default function CategoriesSection(){
         hidden: {}, 
         show: {
           opacity: 1,
+          transition: { staggerChildren: 0.2, delayChildren: 0.1}
         }
       }}
       initial="hidden"
@@ -20,10 +21,9 @@ export default function CategoriesSection(){
       viewport={{once: false, amount: 0.20}}
       className='flex flex-col lg:flex-row gap-5'
     >
-      {categoriesInfo.map((category, index) => (
+      {categoriesInfo.map((category) => (
         <CategoryCard
           key={category.id}
-          index={index}
           href={category.href}
           title={category.title}
           img={category.img}
