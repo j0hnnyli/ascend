@@ -51,10 +51,10 @@ export default function CategoryCard({ title, img, href }: Props) {
 
       {isHover && (
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scaleX: 0, originX: 'left' }}
+          animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.3 }}
-          className="absolute bottom-4 left-4 right-4 bg-gray-800 bg-opacity-80 rounded-lg flex items-center justify-center overflow-hidden"
+          className="absolute bottom-4 left-4 right-4 bg-gray-800 bg-opacity-80 rounded-lg flex items-center justify-center overflow-hidden "
         >
           <Link href={href} className="text-lg p-4 hover:text-gray-800 hover:bg-[var(--secondary-color)] w-full text-center">
             Shop Now
