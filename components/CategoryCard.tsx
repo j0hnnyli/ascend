@@ -7,30 +7,25 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
-  index: number;
   title: string;
   img: string;
   description: string;
-  // isOpen: boolean;
   href: string;
-  // setOpenIndex: () => void;
 };
 
-export default function CategoryCard({ index, title, img, href }: Props) {
+export default function CategoryCard({ title, img, href }: Props) {
   const [isHover, setIsHover] = useState<boolean>(false);
 
   return (
     <motion.div
       variants={{
-        hidden: { scale: 0.9, rotate: 5, opacity: 0 }, 
+        hidden: { x:-50, opacity: 0 }, 
         show: {
-          scale: 1,
+          x : 0,
           opacity: 1,
-          rotate: 0,
           transition: {
             duration: 0.6, 
             ease: "easeOut",
-            delay: index * 0.15, 
             type: 'spring'
           }
         },
