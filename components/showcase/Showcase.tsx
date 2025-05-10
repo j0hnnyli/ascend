@@ -45,7 +45,7 @@ export default function Showcase(){
           className="w-full h-full flex transition-all ease-in-out duration-500" 
           style={{ transform: `translateX(-${slide * 100}%)` }}
         >
-          {showcaseSlides.map((currSlide) => (
+          {showcaseSlides.map((currSlide, i) => (
             <div 
               key={currSlide.title} 
               className="w-full h-full flex-shrink-0 relative"
@@ -53,6 +53,7 @@ export default function Showcase(){
               <Image
                 src={currSlide.img}
                 alt={currSlide.title}
+                priority={i === 0}
                 fill
                 className="h-full w-full object-cover brightness-[80%]"
               />
