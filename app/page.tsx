@@ -5,11 +5,9 @@ import supabase from "@/lib/supabaseClient";
 import Product from "@/lib/types/productType";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const { data } : {data : Product[] | null} = await supabase.from('populars').select().in('category', ['Clothes', 'Shoes']);
-
-  if(!data?.length) return null;
+export default function Home() {
 
   return (
     <div className="max_width">
@@ -58,12 +56,21 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="">
-            <PopularClothes clothes={data} />
-          </div>
+          <Suspense fallback={<div className="bg-gray-500 animate-pulse w-[313px] h-[450px]"></div>}>
+            <PopularClothesSection />
+          </Suspense>
         </div>
       </div>
 
     </div>
   );
+}
+
+
+async function PopularClothesSection(){
+  const { data } : {data : Product[] | null} = await supabase.from('populars').select().in('category', ['Clothes', 'Shoes']);
+
+  if(!data?.length) return null;
+
+  return <PopularClothes clothes={data} />
 }

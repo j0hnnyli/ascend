@@ -3,64 +3,44 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { MdOutlineArrowOutward } from "react-icons/md";
 
 type Props = {
   title: string;
   img: string;
-  description: string;
   href: string;
 };
 
 export default function CategoryCard({ title, img, href }: Props) {
-  const [isHover, setIsHover] = useState<boolean>(false);
 
   return (
     <motion.div
-      variants={{
-        hidden: { x:-50, opacity: 0 }, 
-        show: {
-          x : 0,
-          opacity: 1,
-          transition: {
-            duration: 0.6, 
-            ease: "easeOut",
-            type: 'spring'
-          }
-        },
-      }}
-      className={twMerge("relative h-[100px] lg:h-[400px] flex-grow overflow-hidden bg-[var(--primary-color)] rounded-lg text-white cursor-pointer transition-all", isHover && "h-[400px]")}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      initial={{ scaleX: 0, originX: 'left' }}
+      whileInView={{ scaleX: 1 }} 
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{once: true, amount: .2}}
     >
-      <div className="absolute w-full h-full left-10 lg:left-0">
-        <Image
-          src={img}
-          alt={title}
-          fill
-          className="object-cover w-full h-full brightness-90"
-        />
-      </div>
-
-      <h2
-        className="absolute top-4 left-4 text-2xl font-bold z-10 text-gray-900"
-      >
-        {title}
-      </h2>
-
-      {isHover && (
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0, originX: 'left' }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.3 }}
-          className="absolute bottom-4 left-4 right-4 bg-gray-800 bg-opacity-80 rounded-lg flex items-center justify-center overflow-hidden "
+       <Link href={href}
+       > 
+        <div 
+          className="group bg-[var(--primary-color)] rounded-xl w-full relative h-[200px] md:h-[300px] overflow-hidden"
         >
-          <Link href={href} className="text-lg p-4 hover:text-gray-800 hover:bg-[var(--secondary-color)] w-full text-center">
-            Shop Now
-          </Link>
-        </motion.div>
-      )}
+          <div className='flex items-center text-4xl absolute top-2 left-2 bg-[var(--primary-color)] '>
+            <h2 className=''>{title}</h2>
+            <MdOutlineArrowOutward className='group-hover:ml-2 group-hover:mb-2 transition-all duration-300 ease-in-out text-xl mt-2'/>
+          </div>
+          <div 
+            className='absolute w-full h-full bottom-0 md:-bottom-10 -right-20 md:-right-10  lg:-right-20 group-hover:-bottom-5 group-hover:-right-15  transition-all duration-300 ease-in-out'
+          >
+            <Image 
+              src={img}
+              alt={title}
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+      </Link>
     </motion.div>
   );
 }
