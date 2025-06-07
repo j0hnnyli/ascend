@@ -26,7 +26,7 @@ export default function CategoryCard({ title, img, href }: Props) {
             <MdOutlineArrowOutward className='group-hover:ml-2 group-hover:mb-2 transition-all duration-300 ease-in-out text-xl mt-2'/>
           </div>
           <div 
-            className='absolute w-[200px] h-[200px] -bottom-1/3 right-0 group-hover:right-5  transition-all duration-300 ease-in-out'
+            className='absolute w-[200px] h-[200px] -bottom-1/3 md:-bottom-5 lg:-bottom-1/3 right-0 group-hover:right-2  transition-all duration-300 ease-in-out'
           >
             <Image 
               src={img}
