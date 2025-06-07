@@ -19,7 +19,7 @@ export default function About(){
             <RevealY 
               delayTime={0.6}
             >
-              Founded by Johnny in 2025, Ascend was built on a vision of blending modern style with timeless craftsmanship. With a deep commitment to sustainability, we create thoughtfully designed products that balances contemporary aesthetics with responsible production.
+               Ascend was built on a vision of blending modern style with timeless craftsmanship. With a deep commitment to sustainability, we create thoughtfully designed products that balances contemporary aesthetics with responsible production.
             </RevealY>
 
             <RevealY 

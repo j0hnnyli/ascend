@@ -39,7 +39,7 @@ export default function CategoriesSection() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
         {secondRow.map((category, index) => {
           const distance = Math.abs(index - middleSecond);
-          const delay = distance * 0.2;
+          const delay = distance * 0.2 + 0.1;
 
           return (
             <motion.div
