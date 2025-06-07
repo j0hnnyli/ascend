@@ -36,7 +36,7 @@ export default function Showcase(){
   }
 
   return (
-    <div className="flex items-center justify-center p-2 md:p-5 h-[calc(100vh-64px)] md:h-[calc(100vh-112px)] max-h-[900px]">
+    <div className="flex items-center justify-center p-2 md:p-5 h-[calc(100vh-64px)] md:h-[calc(100vh-112px)] max-h-[800px] max_width mx-auto">
       <div 
         className="h-full w-full relative overflow-hidden "
       >
