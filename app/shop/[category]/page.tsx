@@ -1,19 +1,17 @@
 import supabase from "@/lib/supabaseClient";
 import Product from "@/lib/types/productType";
 import Card from "@/components/Card";
-import { FaExclamationTriangle } from 'react-icons/fa';
+import CategoryNotFound from "../CategoryNotFound";
 
 type Props = {
   params: Promise<{ category: string }>;
 }
 
-export default async function ShopPage({ params } : Props){
+export default async function FilteredProductPage({ params } : Props){
   const param = await params;
   const currCategory = param.category
 
-  const { data }: { data: Product[] | null } = 
-  currCategory.toLowerCase() === 'all' ? await supabase.from('products').select()
-    : currCategory === 'Fashion'
+  const { data }: { data: Product[] | null } = currCategory === 'Fashion'
       ? await supabase.from('products').select().in('category', ['Clothes', 'Shoes'])
       : await supabase.from('products').select().eq('category', currCategory[0].toUpperCase() + currCategory.slice(1));
 
@@ -30,16 +28,3 @@ export default async function ShopPage({ params } : Props){
     </div>
   )
 } 
-
-
-
-function CategoryNotFound(){
-  return (
-    <div className="flex flex-col items-center justify-center text-center p-4">
-      <FaExclamationTriangle className="text-6xl text-red-500 mb-4" />
-      <p className="text-lg text-gray-600 mb-4">
-        Oops! The category you&apos;re looking for doesn&apos;t exist.
-      </p>
-    </div>
-  )
-}

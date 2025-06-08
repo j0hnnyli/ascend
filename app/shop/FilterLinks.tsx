@@ -10,14 +10,22 @@ type Props = {
 
 export default function FilterLinks({ title } : Props){
   const pathname = usePathname(); 
-  const category = pathname.split("/")[2]; 
+  const currentCat = pathname.split('/')[2]?.toLowerCase() || '';  
+  const titleLower = title.toLowerCase();
 
+
+  const link = title === 'All' ? '/shop' : `/shop/${title}`
+
+  const isActive = titleLower === 'all'
+  ? currentCat === ''
+  : currentCat === titleLower;
+ 
   return (
     <Link
-      href={`/shop/${title}`}
+      href={link}
       className={
         twMerge("hover:underline cursor-pointer",
-          category.toLowerCase()  ===  title.toLowerCase() && "underline"
+          isActive && "underline"
         )
       }
     >
