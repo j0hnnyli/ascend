@@ -1,58 +1,45 @@
 'use client'
 
-import { CartContext } from "@/lib/CartContext"
+import { useCartStore } from "@/lib/store";
 import Image from "next/image"
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react"
 import { FaRegTrashCan } from "react-icons/fa6";
 import { twMerge } from "tailwind-merge";
+import LoadingDisplayScreen from "./LoadingSkeleton";
 
 
 export default function CartDisplay(){
-  const [isMounted, setIsMounted] = useState(false);
-  const { cart, setCart, handleRemove } = useContext(CartContext)
+  const cart = useCartStore((state) => state.cart);
+  const handleRemove = useCartStore((state) => state.removeItem);
+  const handleAddQuantity = useCartStore((state) => state.handleAddQuantity);
+  const handleSubQuantity = useCartStore((state) => state.handleSubQuantity);
+  const  isHydrated  = useCartStore((state) => state.isHydrated)
 
-  const handleAddQuantity = (id : string) => {
-    setCart(() => cart.map((item) => 
-      item.cartItemId === id ? 
-      {...item, quantity : item.quantity + (item.quantity < 9 ? 1 : 0) } : 
-     item 
-    )
-  )
-}
+  if(!isHydrated){
+    return <LoadingDisplayScreen />
+  }
 
-const handleSubQuantity = (id : string) => {
-    setCart(() => cart.map((item) => 
-      item.cartItemId === id ? 
-      {...item, quantity : item.quantity - (item.quantity === 1 ? 0 : 1)} : 
-      item 
-    )
-  )
-}
-
-const cartTotal = cart.reduce((total, cur) => total + (cur.price * cur.quantity), 0).toFixed(2)
-
-useEffect(() => {
-  setIsMounted(true)
-}, [])
+  const cartTotal = cart.reduce((total, cur) => total + (cur.price * cur.quantity), 0).toFixed(2)
 
   return (
     <>
-      {isMounted && cart.length === 0 && (
+      {cart.length === 0 && (
         <div> 
+          <h1 className="font_crimson text-4xl">Shopping Cart</h1>
           <p className="text-lg">You have nothing in your shopping cart.</p>
-
           <div className="mt-5">
-            <Link href="/shop/All" className="py-2 px-4 border border-black hover:bg-[var(--secondary-color)]">
+            <Link href="/shop" className="py-2 px-4 border border-black hover:bg-[var(--secondary-color)]">
               Continue Shopping
             </Link>
           </div>
         </div>
       )}
       
-      {isMounted && cart.length > 0  && (
+      {cart.length > 0  && (
           <div>
             <div>
+              <h1 className="font_crimson text-4xl">Shopping Cart</h1>
+
               {cart.map((cartItem) => (
                 <div key={cartItem.cartItemId} className="py-5 border-b border-black flex gap-3 justify-between relative">
                   <div className="w-full md:w-[200px] h-[200px]">

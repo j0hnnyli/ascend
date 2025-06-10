@@ -1,21 +1,17 @@
 'use client'
 
-import { CartContext } from "@/lib/CartContext"
-import { useContext, useEffect, useState } from "react"
+import { useCartStore } from "@/lib/store"
+import LoadingSkeleton from "../LoadingSkeleton"
 
 export default function CartLengthComponent(){
-  const [isMounted, setIsMounted] = useState(false);
-  const { cart } = useContext(CartContext);
+  const  cart  = useCartStore((state) => state.cart)
+  const  isHydrated  = useCartStore((state) => state.isHydrated)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  if(!isHydrated){
+    return <LoadingSkeleton className="w-2 h-3 rounded-md"></LoadingSkeleton>
+  }
 
   return (
-    <>
-      {isMounted && (
-        <p className="text-sm">{cart.length}</p>    
-      )}
-    </>
+    <p className="text-sm">{cart.length}</p>    
   )
 }

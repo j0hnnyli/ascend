@@ -12,18 +12,18 @@ import Product from "@/lib/types/productType";
 import ImageChoiceComponent from "./ImageChoiceComponent";
 import SizeSelect from "./SizeSelect";
 import Quantities from "./Quantities";
-import { useContext, useState } from "react";
-import { CartContext } from "@/lib/CartContext";
+import { useState } from "react";
 import { wait } from "@/lib/utils";
 import { twMerge } from "tailwind-merge";
 import { AiOutlineLoading } from "react-icons/ai";
+import { useCartStore } from "@/lib/store";
 
 type Props = {
   product : Product;
 }
 
 export default function QuickAddButton({ product } : Props){
-  const { handleAdd } = useContext(CartContext);
+  const handleAdd = useCartStore((state) => state.addItem);
 
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
@@ -46,7 +46,7 @@ export default function QuickAddButton({ product } : Props){
       return;
     }
     
-    await wait(1500);
+    await wait(1000);
     setIsLoading(false);
     setSuccess(true);
 
@@ -146,7 +146,7 @@ export default function QuickAddButton({ product } : Props){
 
 
 function QuantityInCart({id, isClothes} : {id : number, isClothes: boolean}){
-  const { cart } = useContext(CartContext);
+  const cart = useCartStore((state) => state.cart)
 
   const productItems = cart.filter((item) => item.id === id);
   const totalQuantity = productItems.reduce((acc, item) => acc + item.quantity, 0);

@@ -2,20 +2,20 @@
 
 import Quantities from "@/components/Quantities";
 import SizeSelect from "@/components/SizeSelect";
-import { CartContext } from "@/lib/CartContext";
 import Product from "@/lib/types/productType";
 import { wait } from "@/lib/utils";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { IoIosCart } from "react-icons/io";
 import { twMerge } from "tailwind-merge";
+import { useCartStore } from "@/lib/store";
 
 type Props = {
   product : Product;
 }
 
 export default function ProductControls({product} : Props){
-  const { handleAdd } = useContext(CartContext);
+  const handleAdd  = useCartStore((state) => state.addItem);
   
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
