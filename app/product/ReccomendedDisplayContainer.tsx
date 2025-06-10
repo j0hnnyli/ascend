@@ -59,7 +59,7 @@ export default function ReccomendedDisplayContainer({ reccomendeds } : Props) {
 
       <div 
         ref={carouselRef}
-        className="w-full flex gap-5 overflow-auto lg:overflow-hidden no-scrollbar mt-5 scroll-smooth"
+        className="w-full flex gap-5 overflow-auto no-scrollbar mt-5 scroll-smooth"
       >
         {reccomendeds.map((product) => (
           <div 
