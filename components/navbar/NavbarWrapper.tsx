@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-type Props = {
+type Props = {  
   children : ReactNode;
   className : string;
 }

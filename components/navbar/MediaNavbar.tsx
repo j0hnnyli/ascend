@@ -19,7 +19,7 @@ export default function MediaNavbar(){
   return (
     <>
       <NavbarWrapper className="bg-[var(--primary-color)] flex justify-between items-center md:hidden fixed top-0 w-full h-16 z-50">
-        <nav className="w-full flex justify-between items-center px-2 h-full bg-inherit">
+        <nav className="w-full flex justify-between items-center px-2 h-full">
           <div 
             onClick={() => setIsOpen(!isOpen)}
             className={twMerge("transition-all ease-in-out duration-500",isOpen && "rotate-360")}
