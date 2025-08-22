@@ -16,7 +16,7 @@ export default function NavLink({ href, name} : Props ){
 
   return (
     <Link href={href} 
-      className={twMerge("pb-1 ", 
+      className={twMerge("pb-1 hover:scale-105", 
         pathname.includes(name.toLowerCase()) && "border-b border-black",
         pathname === aboutPath && "border-white")
       }
